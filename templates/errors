@@ -1,0 +1,88 @@
+PS D:\stocks\prep\vs_code\E_shop> python manage.py runserver
+Watching for file changes with StatReloader
+Performing system checks...
+
+System check identified no issues (0 silenced).
+
+You have 18 unapplied migration(s). Your project may not work properly until you apply the migrations for app(s): admin, auth, contenttypes, sessions.
+Run 'python manage.py migrate' to apply them.
+May 09, 2025 - 16:28:04
+Django version 5.2, using settings 'E_shop.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CTRL-BREAK.
+
+WARNING: This is a development server. Do not use it in a production setting. Use a production WSGI or ASGI server instead.
+For more information on production servers see: https://docs.djangoproject.com/en/5.2/howto/deployment/
+[09/May/2025 16:28:09] "GET / HTTP/1.1" 200 58363
+Not Found: /js/jquery.js
+Not Found: /js/price-range.js
+Not Found: /js/jquery.scrollUp.min.js
+Not Found: /js/bootstrap.min.js
+[09/May/2025 16:28:09] "GET /js/jquery.js HTTP/1.1" 404 2384
+[09/May/2025 16:28:09] "GET /js/jquery.scrollUp.min.js HTTP/1.1" 404 2423
+Not Found: /js/jquery.prettyPhoto.js
+[09/May/2025 16:28:09] "GET /js/bootstrap.min.js HTTP/1.1" 404 2405
+Not Found: /js/main.js
+[09/May/2025 16:28:09] "GET /js/price-range.js HTTP/1.1" 404 2399
+[09/May/2025 16:28:09] "GET /js/jquery.prettyPhoto.js HTTP/1.1" 404 2420
+[09/May/2025 16:28:09] "GET /js/main.js HTTP/1.1" 404 2378
+Not Found: /images/home/recommend3.jpg
+[09/May/2025 16:28:09] "GET /images/home/recommend3.jpg HTTP/1.1" 404 2426
+[09/May/2025 16:28:09] "GET /static/images/ico/favicon.ico HTTP/1.1" 404 1880
+[09/May/2025 16:41:06] "GET / HTTP/1.1" 200 58363
+Not Found: /js/jquery.js
+Not Found: /images/home/recommend3.jpg
+Not Found: /js/bootstrap.min.js
+[09/May/2025 16:41:06] "GET /js/jquery.js HTTP/1.1" 404 2384
+[09/May/2025 16:41:06] "GET /images/home/recommend3.jpg HTTP/1.1" 404 2426
+[09/May/2025 16:41:06] "GET /js/bootstrap.min.js HTTP/1.1" 404 2405
+Not Found: /js/price-range.js
+Not Found: /js/jquery.scrollUp.min.js
+Not Found: /js/main.js
+Not Found: /js/jquery.prettyPhoto.js
+[09/May/2025 16:41:06] "GET /js/price-range.js HTTP/1.1" 404 2399
+[09/May/2025 16:41:06] "GET /js/jquery.scrollUp.min.js HTTP/1.1" 404 2423
+[09/May/2025 16:41:06] "GET /js/main.js HTTP/1.1" 404 2378
+[09/May/2025 16:41:06] "GET /js/jquery.prettyPhoto.js HTTP/1.1" 404 2420
+[09/May/2025 16:41:06] "GET /static/images/ico/favicon.ico HTTP/1.1" 404 1880
+[09/May/2025 16:41:17] "GET / HTTP/1.1" 200 58411
+Not Found: /images/home/recommend3.jpg
+[09/May/2025 16:41:17] "GET /images/home/recommend3.jpg HTTP/1.1" 404 2426
+[09/May/2025 16:41:17] "GET /static/js/bootstrap.min.js HTTP/1.1" 200 27822
+[09/May/2025 16:41:17] "GET /static/js/jquery.js HTTP/1.1" 200 93106
+[09/May/2025 16:41:17] "GET /static/js/jquery.scrollUp.min.js HTTP/1.1" 200 2151
+[09/May/2025 16:41:17] "GET /static/js/main.js HTTP/1.1" 200 1269
+[09/May/2025 16:41:17] "GET /static/js/price-range.js HTTP/1.1" 200 11257
+[09/May/2025 16:41:17] "GET /static/js/jquery.prettyPhoto.js HTTP/1.1" 200 22060
+[09/May/2025 16:41:18] "GET /static/images/ico/favicon.ico HTTP/1.1" 404 1880
+PS D:\stocks\prep\vs_code\E_shop> python manage.py runserver
+Watching for file changes with StatReloader
+Performing system checks...
+
+System check identified no issues (0 silenced).
+
+You have 18 unapplied migration(s). Your project may not work properly until you apply the migrations for app(s): admin, auth, contenttypes, sessions.
+Run 'python manage.py migrate' to apply them.
+May 09, 2025 - 16:43:04
+Django version 5.2, using settings 'E_shop.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CTRL-BREAK.
+
+WARNING: This is a development server. Do not use it in a production setting. Use a production WSGI or ASGI server instead.
+For more information on production servers see: https://docs.djangoproject.com/en/5.2/howto/deployment/
+[09/May/2025 16:43:10] "GET / HTTP/1.1" 200 58411
+Not Found: /images/home/recommend3.jpg
+[09/May/2025 16:43:10] "GET /images/home/recommend3.jpg HTTP/1.1" 404 2426
+[09/May/2025 16:43:10] "GET /static/images/ico/favicon.ico HTTP/1.1" 404 1880
+[09/May/2025 16:44:13] "GET / HTTP/1.1" 200 58411
+Not Found: /images/home/recommend3.jpg
+[09/May/2025 16:44:13] "GET /images/home/recommend3.jpg HTTP/1.1" 404 2426
+[09/May/2025 16:44:14] "GET /static/images/ico/favicon.ico HTTP/1.1" 404 1880
+[09/May/2025 16:44:54] "GET / HTTP/1.1" 200 58419
+[09/May/2025 16:44:55] "GET /static/images/ico/favicon.ico HTTP/1.1" 404 1880
+[09/May/2025 16:48:09] "GET / HTTP/1.1" 200 58419
+[09/May/2025 16:48:10] "GET /static/images/ico/favicon.ico HTTP/1.1" 200 1406
+Not Found: /shop.html
+[09/May/2025 16:48:37] "GET /shop.html HTTP/1.1" 404 2375
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+[09/May/2025 16:48:49] "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 2492
