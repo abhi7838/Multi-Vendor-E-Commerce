@@ -1,4 +1,5 @@
 from django.shortcuts import render,HttpResponse
+from app.models import Category, Sub_Category,Brands
 
 
 
@@ -7,7 +8,12 @@ def master(request):
 
 
 def index(request):
-    return render(request,'index.html')
+    brands = Brands.objects.all()
+    category = Category.objects.all()
+    context = {
+        'category':category,'brands':brands,
+    }
+    return render(request,'index.html',context)
 
 # def test(request):
     # return render(request,'test.html')
