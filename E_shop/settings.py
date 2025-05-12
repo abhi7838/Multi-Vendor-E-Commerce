@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-ao5%nsy)z!r(q!d%ejsdsfjr3&zjrwehkcy1#*79t$=ty5x3hl
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['https://abhi7838.github.io/Multi-Vendor-E-Commerce/']
 
 
 # Application definition
