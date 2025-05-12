@@ -10,7 +10,19 @@ def master(request):
 def index(request):
     brands = Brands.objects.all()
     category = Category.objects.all()
-    product = Product.objects.all()
+    # product = Product.objects.all()
+    category_ID = request.GET.get('category')
+    print(category_ID)
+    print('hellp')
+
+    if category_ID:
+        product = Product.objects.filter(Sub_Category=category_ID)
+        print('running if')
+
+    else:
+        product = Product.objects.all()
+        print('running else')
+
     context = {
         'category':category,'brands':brands,'product':product
     }
