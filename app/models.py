@@ -1,5 +1,5 @@
 from django.db import models
-
+#Abhishek ka papa hai lucky
 # Create your models here.
 class Category(models.Model):
     name = models.CharField(max_length=150)
