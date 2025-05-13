@@ -1,4 +1,4 @@
-from django.shortcuts import render,HttpResponse
+from django.shortcuts import render,HttpResponse,redirect
 from app.models import Category, Sub_Category,Brands,Product
 
 
@@ -31,7 +31,7 @@ def index(request):
 def signup(request):
     if request.method == 'POST':
         form = UserCreateForm(request.POST)
-        if form.is_valid:
+        if form.is_valid():
             new_user = form.save()
             new_user = authenticate(
                 username = form.cleaned_data['username'],
