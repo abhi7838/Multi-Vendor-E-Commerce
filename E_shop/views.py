@@ -9,11 +9,16 @@ from app.models import UserCreateForm
 def master(request):
     return render(request, 'master.html')
 
-def index(request):
-    return render(request,'index.html')
-
 def contact(request):
-    return render(request, 'registration/contact.html')
+    return render(request, 'contact.html')
+
+
+def cart(request):
+    return render(request,'cart.html')
+
+
+def checkout(request):
+    return render(request,'checkout.html')
 
 
 def index(request):
