@@ -9,6 +9,12 @@ from app.models import UserCreateForm
 def master(request):
     return render(request, 'master.html')
 
+def index(request):
+    return render(request,'index.html')
+
+def contact(request):
+    return render(request, 'registration/contact.html')
+
 
 def index(request):
     brands = Brands.objects.all()
@@ -48,5 +54,8 @@ def signup(request):
 
 
     return render(request,'registration/signup.html',context)
+
+
+
     
  

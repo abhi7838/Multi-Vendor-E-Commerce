@@ -37,6 +37,9 @@ class Product(models.Model):
     def __str__(self):
         return self.name
     
+
+"""code for getting creating a new user if user already exits then it will show a message that user already exists """
+    
 class UserCreateForm(UserCreationForm):
     email = forms.EmailField(required=True,label='email',error_messages={"exists":"this mail is already exists"})
 
@@ -67,3 +70,17 @@ class UserCreateForm(UserCreationForm):
         if User.objects.filter(email=self.cleaned_data['email']).exists():
             raise forms.ValidationError(self.fields['email'].error_messages['exists'])
         return self.cleaned_data['email']
+    
+
+
+"""code for getting user information in contact page where it will  be analysed and after that it will be assignwed to various department"""
+
+class ContactFormSubmission(models.Model):
+    firstname  = models.CharField(max_length=50)
+    lastname = models.CharField(max_length=50)
+    country = models.CharField(max_length=20)
+    subject = models.TextField()
+    submission_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.firstname} {self.lastname} - {self.submission_date.strftime('%Y-%m-%d %H:%M:%S')}"
