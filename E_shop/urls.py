@@ -30,6 +30,7 @@ urlpatterns = [
     path('contact',views.contact_view,name= 'contact'),
     path('cart',views.cart,name= 'cart'),
     path('checkout',views.checkout,name= 'checkout'),
+    path('products',views.products,name= 'products'),
 
 
 
