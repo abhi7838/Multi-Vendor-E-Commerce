@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
+import datetime
 
 
 # Create your models here.
@@ -81,6 +82,11 @@ class ContactFormSubmission(models.Model):
     country = models.CharField(max_length=20)
     subject = models.TextField()
     submission_date = models.DateTimeField(auto_now_add=True)
-
+    now = datetime.datetime.now()
+    today = datetime.datetime.today()
     def __str__(self):
-        return f"{self.firstname} {self.lastname} - {self.submission_date.strftime('%Y-%m-%d %H:%M:%S')}"
+        return f"{self.firstname} {self.lastname} {self.now}"
+        
+    class Meta:
+        verbose_name_plural = 'Contact Form data'
+        ordering = ['-submission_date']

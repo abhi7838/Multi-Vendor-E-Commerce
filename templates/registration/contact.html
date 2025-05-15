@@ -4,16 +4,15 @@
 
 {% block content %}
 <div class="container">
-  <form > 
-    {% comment %} action="{%url 'Contact'%} method = 'post" {% endcomment %}
-    {% comment %} {% csrf_token %} {% endcomment %}
+  <form  method = "POST"> 
+     {% csrf_token %}
 
-    <label for="fname">First Name</label>
-    <input  type="text" id="fname" name="firstname" placeholder="Your name.." style="height:50px" style = "width=500px">
+    <label for="first_name">First Name</label>
+    <input  type="text" id="fname" name="first_name" placeholder="Your name.." style="height:50px" style = "width=500px">
     <br>
 
-    <label for="lname">Last Name</label>
-    <input type="text" id="lname" name="lastname" placeholder="Your last name..">
+    <label for="last_name">Last Name</label>
+    <input type="text" id="lname" name="last_name" placeholder="Your last name..">
     <br>
 
     <label for="country">Country</label>

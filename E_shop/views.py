@@ -1,16 +1,17 @@
 from django.shortcuts import render,HttpResponse,redirect
-from app.models import Category, Sub_Category,Brands,Product
+from app.models import Category, Sub_Category,Brands,Product,ContactFormSubmission,UserCreateForm
+from django.contrib import messages
 
 
 from django.contrib.auth import authenticate,login
-from app.models import UserCreateForm
+
 
 
 def master(request):
     return render(request, 'master.html')
 
-def contact(request):
-    return render(request, 'contact.html')
+# def contact(request):
+#     return render(request, 'contact.html')
 
 
 def cart(request):
@@ -56,9 +57,30 @@ def signup(request):
     context = {
         'form':form,
     }
-
-
     return render(request,'registration/signup.html',context)
+
+def contact_view(request):
+    if request.method == "POST":
+        firstname = request.POST.get('firstname')
+        lastname = request.POST.get('lastname')
+        country   = request.POST.get('country')
+        subject = request.POST.get('subject')
+        print('post')
+
+        ContactFormSubmission.objects.create(
+            firstname= firstname,  # The value from request.POST
+            lastname = lastname,    # The value from request.POST
+            country = country,        # The value from request.POST
+            subject = subject          # The value from request.POST
+
+        )
+
+
+
+        messages.success(request,'Your message has been submitted sucessfully')
+        return redirect('contact')
+
+    return render(request, 'contact.html')
 
 
 

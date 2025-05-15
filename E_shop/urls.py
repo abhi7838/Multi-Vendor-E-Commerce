@@ -21,13 +21,13 @@ from django.conf import settings
 from django.conf.urls.static import static 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin', admin.site.urls),
     path('master/',views.master,name = 'master'),
     path('',views.index,name = 'index'),
     path('index',views.index,name = 'index'),
     path('signup',views.signup,name='signup'),
     path('account/',include('django.contrib.auth.urls')),
-    path('contact',views.contact,name= 'contact'),
+    path('contact',views.contact_view,name= 'contact'),
     path('cart',views.cart,name= 'cart'),
     path('checkout',views.checkout,name= 'checkout'),
 
