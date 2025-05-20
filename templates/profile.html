@@ -1,0 +1,24 @@
+    {% extends 'master.html' %}  #  You might have a base.html
+    {% block content %}
+    {% csrf_token %}
+        <h1>Welcome, {{ user.username }}!</h1>
+        {% if profile %}
+            <p>Name: {{ profile.name }}</p>
+            {#  Display other profile fields #}
+        {% else %}
+            <p>No profile information available.</p>
+        {% endif %}
+        <p>Email: {{ user.email }}</p>
+        {% comment %} <a href="{% url 'logout' %}">Logout</a>  {# Add a logout link #} {% endcomment %}
+        <li class="nav-item">
+        <form method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit" class="nav-link">
+                <i class="fa fa-user"></i> Logout
+            </button>
+        </form>
+        </li>
+        <br>
+        <br>
+        <br>
+    {% endblock %}

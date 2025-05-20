@@ -1,6 +1,7 @@
 from django.shortcuts import render,HttpResponse,redirect
-from app.models import Category, Sub_Category,Brands,Product,ContactFormSubmission,UserCreateForm
+from app.models import Category, Sub_Category,Brands,Product,ContactFormSubmission,UserCreateForm,UserProfile
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 
 from django.contrib.auth import authenticate,login
@@ -10,27 +11,33 @@ from django.contrib.auth import authenticate,login
 def master(request):
     return render(request, 'master.html')
 
-# def contact(request):
-#     return render(request, 'contact.html')
+def contact(request):
+    return render(request, 'contact.html')
 
-
+# @login_required
 def cart(request):
     return render(request,'cart.html')
 
-
+@login_required
 def wishlist(request):
     return render(request,'wishlist.html')
 
 def products(request):
     return render(request,'products.html')
 
-
+@login_required
 def checkout(request):
     return render(request,'checkout.html')
 
 
-def login(request):
-    return render(request,'login.html')
+def login_1(request):
+    return render(request,'login_1.html')
+
+def logout(request):
+    return render(request,'logout.html')
+
+def profile(request):
+    return render(request, 'profile.html')
 
 
 def index(request):
@@ -60,7 +67,7 @@ def signup(request):
                 username = form.cleaned_data['username'],
                 passsword = form.cleaned_data['password1'],
             )
-            login(request,new_user)
+            login_1(request)
             return redirect('index')
     else:
         form = UserCreateForm()
@@ -92,6 +99,18 @@ def contact_view(request):
         return redirect('contact')
 
     return render(request, 'contact.html')
+
+
+@login_required
+def profile_view(request):
+    try:
+        profile = request.user.profile
+
+    except UserProfile.DoesNotExist:
+        profile = None
+    return render(request,'profile.html',{'user':request.user, 'profile':profile})
+
+
 
 
 

@@ -106,7 +106,22 @@
 								<li><a href="checkout"><i class="fa fa-crosshairs"></i> Checkout</a></li>
 								<li><a href="cart"><i class="fa fa-shopping-cart"></i> Cart</a></li>
 								<li><a href="signup"><i class="fa fa-lock"></i> Signup</a></li>
-								<li><a href="login"><i class="fa fa-user"></i> Login</a></li>
+								{% if user.is_authenticated %}
+								<li class="nav-item">
+    								<form method="post" action="{% url 'logout' %}">
+        								{% csrf_token %}
+        								<button type="submit" class="nav-link">
+            								<i class="fa fa-user"></i> Logout
+        								</button>
+    								</form>
+							    </li>
+								{% else %}
+								<li class="nav-item">
+    								<a class="nav-link" href="{% url 'login_1' %}">
+        								<i class="fa fa-user"></i> Login
+    								</a>
+								</li>
+								{% endif %}
 							</ul>
 						</div>
 					</div>
