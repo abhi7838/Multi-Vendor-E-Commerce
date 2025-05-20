@@ -1,0 +1,33 @@
+{% extends "master.html" %}
+
+{% block content %}
+    <form method="post" action="{% url 'login' %}">
+    {% csrf_token %}
+    <section>
+        <div class="col-sm-4 col-sm-offset-1">
+            <div class="form-group" class="col-md-6">
+                <label for="username">Name:</label>
+                <input type="text" class="form-control" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Email Address:</label>
+                <input type="password" class="form-control" id="password" name="password" required>
+            </div>
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" name="remember"> Keep me signed in
+                </label>
+            </div>
+            <button type="submit" class="btn btn-default">Login</button> 
+            {% comment %} <a> href = "{%url signup%}" name = "signup" </a> {% endcomment %}
+            <a href="http://127.0.0.1:8000/signup" style="margin-left: 250px;">  Create Your Account  </a>
+        </div>
+    </form>
+    </section>
+<div style="height: 300px;"></div>
+
+
+
+
+
+{% endblock content %}

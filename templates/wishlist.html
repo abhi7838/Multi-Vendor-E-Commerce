@@ -1,0 +1,159 @@
+{% extends "master.html" %}
+{% block content %}
+<div class="wishlist-container">
+  <h2>My Wishlist</h2>
+  <ul class="wishlist-items">
+    <li class="wishlist-item">
+      <div class="item-details">
+        <a href="#">
+          <img src="placeholder-image.jpg" alt="Product Image" width="80" height="80">
+        </a>
+        <div class="product-info">
+          <a href="#" class="product-name">Product Name Goes Here</a>
+          <p class="product-price">$XX.XX</p>
+        </div>
+      </div>
+      <div class="item-actions">
+        <button class="add-to-cart-btn">Add to Cart</button>
+        <button class="remove-from-wishlist-btn" data-product-id="123">Remove</button>
+      </div>
+    </li>
+
+    <li class="wishlist-item">
+      <div class="item-details">
+        <a href="#">
+          <img src="placeholder-image-2.jpg" alt="Another Product Image" width="80" height="80">
+        </a>
+        <div class="product-info">
+          <a href="#" class="product-name">Another Great Product</a>
+          <p class="product-price">$YY.YY</p>
+        </div>
+      </div>
+      <div class="item-actions">
+        <button class="add-to-cart-btn">Add to Cart</button>
+        <button class="remove-from-wishlist-btn" data-product-id="456">Remove</button>
+      </div>
+    </li>
+
+    </ul>
+
+  <div class="wishlist-empty" style="display:none;">
+    <p>Your wishlist is currently empty.</p>
+    <a href="/shop">Browse Products</a>
+  </div>
+</div>
+
+<style>
+  .wishlist-container {
+    padding: 20px;
+  }
+
+  .wishlist-items {
+    list-style: none;
+    padding: 0;
+  }
+
+  .wishlist-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 0;
+    border-bottom: 1px solid #eee;
+  }
+
+  .wishlist-item:last-child {
+    border-bottom: none;
+  }
+
+  .item-details {
+    display: flex;
+    align-items: center;
+  }
+
+  .item-details img {
+    margin-right: 15px;
+    border: 1px solid #ddd;
+  }
+
+  .product-info a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+  }
+
+  .product-price {
+    color: #666;
+    margin-top: 5px;
+  }
+
+  .item-actions button {
+    padding: 8px 15px;
+    margin-left: 10px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+  }
+
+  .add-to-cart-btn {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+  }
+
+  .remove-from-wishlist-btn {
+    background-color: #dc3545;
+    color: white;
+    border-color: #dc3545;
+  }
+
+  .wishlist-empty {
+    text-align: center;
+    padding: 20px 0;
+    color: #777;
+  }
+
+  .wishlist-empty a {
+    color: #007bff;
+    text-decoration: none;
+  }
+</style>
+
+<script>
+  // This is a basic example of how you might handle the "Remove" button click.
+  // In a real application, you would use JavaScript to make an AJAX request
+  // to your server to update the user's wishlist.
+  document.addEventListener('DOMContentLoaded', function() {
+    const removeButtons = document.querySelectorAll('.remove-from-wishlist-btn');
+    const wishlistItems = document.querySelector('.wishlist-items');
+    const wishlistEmpty = document.querySelector('.wishlist-empty');
+
+    removeButtons.forEach(button => {
+      button.addEventListener('click', function() {
+        const productId = this.dataset.productId;
+        const listItem = this.closest('.wishlist-item');
+
+        // In a real scenario, you would send an AJAX request to remove the item
+        // from the server-side wishlist.
+
+        // For this client-side example, we'll just remove the item from the DOM.
+        if (listItem) {
+          listItem.remove();
+          if (wishlistItems.children.length === 0) {
+            wishlistEmpty.style.display = 'block';
+          }
+        }
+
+        console.log(`Removing product with ID: ${productId}`);
+      });
+    });
+
+    // You would also need JavaScript to handle the "Add to Cart" button clicks
+    // and potentially load wishlist items dynamically from the server when the
+    // page loads.
+  });
+</script>
+
+
+
+
+{% endblock content %}

@@ -56,7 +56,7 @@ ROOT_URLCONF = 'E_shop.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],  # Add your project-level templates directory here,
+        'DIRS': ['templates'],  # Add your project-level templates directory here,
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -117,6 +117,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = 'static/'
+LOGIN_REDIRECT_URL = 'profile'
 STATIC_ROOT = '/static/'
 STATICFILES_DIRS  =  [ 
     os.path.join(BASE_DIR,'static')

@@ -1,0 +1,33 @@
+{% extends "master.html" %}
+{%load static%}
+
+
+{% block content %}
+<div class="container">
+  <form  method = "POST"> 
+     {% csrf_token %}
+
+    <label for="first_name">First Name</label>
+    <input  type="text" id="fname" name="first_name" placeholder="Your name.." style="height:50px" style = "width=500px">
+    <br>
+
+    <label for="last_name">Last Name</label>
+    <input type="text" id="lname" name="last_name" placeholder="Your last name..">
+    <br>
+
+    <label for="country">Country</label>
+    <select id="country" name="country">
+      <option value="australia">India</option>
+      <option value="canada">China</option>
+      <option value="usa">USA</option>
+    </select>
+
+    <label for="subject">Subject</label>
+    <textarea id="subject" name="subject" placeholder="Write something.." style="height:200px"></textarea>
+
+    <input type="submit" value="Submit">
+
+  </form>
+</div>
+
+{% endblock content %}
