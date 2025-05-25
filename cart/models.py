@@ -68,3 +68,10 @@ class CartItem(models.Model): # for adding products in cart
     @property
     def total_item_price(self):
         return self.quantity*self.Product.price
+    
+
+#class for adding product in cart 
+class AddToCartForm(forms.Form):
+    quantity = forms.IntegerField(min_value=1,initial=1)
+    product_id = forms.IntegerField(widget=forms.HiddenInput())
+

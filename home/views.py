@@ -18,7 +18,7 @@ def profile(request):
 def index(request):
     brands = Brands.objects.all()
     category = Category.objects.all()
-    # product = Product.objects.all()
+    product = Product.objects.all()
     category_ID = request.GET.get('category')
 
     if category_ID:
