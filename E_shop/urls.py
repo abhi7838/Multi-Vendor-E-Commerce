@@ -21,26 +21,14 @@ from django.conf import settings
 from django.conf.urls.static import static 
 from django.contrib.auth import views as auth_views
 
+
+
 urlpatterns = [
-    path('admin', admin.site.urls),    
-    path('master/',views.master,name = 'master'),
-    path('',views.index,name = 'index'),
-    path('index',views.index,name = 'index'),
-    path('signup',views.signup,name='signup'),
-    path('account/',include('django.contrib.auth.urls')),
-    path('contact',views.contact_view,name= 'contact'),
-    path('cart',views.cart,name= 'cart'),
-    path('checkout',views.checkout,name= 'checkout'),
-    path('products',views.products,name= 'products'),
-    path('login_1',views.login_1,name= 'login_1'),
-    # path('logout', views.logout, name='logout'),
-    path('wishlist',views.wishlist,name= 'wishlist'),
+    path('',include('home.urls')), # all pages of home is included #index,master,views,admin 
+    path('',include('cart.urls')), # included cart app pages included cart, products, wishlist, checkout
+    path('',include('user.urls')), # user app refrenced pages login, logout,profile,signup,contact,account
+    path('admin', admin.site.urls),
     path('logout',auth_views.LogoutView.as_view(next_page = 'login_1'),name='logout'),
     path('login_1',auth_views.LoginView.as_view(template_name = 'login_1.html'),name = 'login_1'),
-    path('profile/',views.profile,name = 'profile'),
 
-
-
-
-
-] + static(settings.MEDIA_URL,document_root = settings.MEDIA_ROOT)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
