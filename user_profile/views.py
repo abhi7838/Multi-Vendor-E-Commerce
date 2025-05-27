@@ -2,7 +2,7 @@ from django.shortcuts import render,get_object_or_404,redirect
 from .models import *
 from django.contrib.auth.decorators import login_required
 
-app_name = 'cart'
+app_name = 'user_profile'
 
 # Create your views here.
 def cart(request):

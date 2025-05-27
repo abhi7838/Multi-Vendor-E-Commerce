@@ -38,9 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'cart', # storing all the information of cart 
+    'user_profile', # storing all the information of cart 
     'user', # storing all the information of user such as login logout and others 
-    'home'
+    'home',
 
 ]
 
