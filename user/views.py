@@ -18,6 +18,9 @@ def logout(request):
 def profile(request):
     return render(request, 'profile.html')
 
+def sucessful_sign_up(request):
+    return render(request,'sucessful_sign_up.html')
+
 
 def signup(request):
     if request.method == 'POST':
@@ -29,7 +32,7 @@ def signup(request):
                 passsword = form.cleaned_data['password1'],
             )
             login_1(request)
-            return redirect('index')
+            return redirect('sucessful_sign_up')
     else:
         form = UserCreateForm()
 
