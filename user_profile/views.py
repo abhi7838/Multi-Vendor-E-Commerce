@@ -1,6 +1,8 @@
 from django.shortcuts import render,get_object_or_404,redirect
 from .models import *
 from django.contrib.auth.decorators import login_required
+from cart.cart import Cart
+
 
 app_name = 'user_profile'
 
@@ -16,6 +18,8 @@ def products(request):
 
 def checkout(request):
     return render(request,'checkout.html')
+
+
 
 
 def add_to_cart(request,product_id):
@@ -60,6 +64,48 @@ def cart_page(request):
 
     context = {'cart_items':cart_items, 'total_price':total_price}
     return render(request,'cart/cart.html',context)
+
+
+@login_required(login_url='/user/login_1')
+def cart_add(request,id):
+    cart = CartItem(request)
+    product = Product.objects.get(id=id)
+    cart.add(product=product)
+    return redirect('cart_page')
+
+@login_required(login_url='/user/login_1')
+def item_clear(request,id):
+    cart = CartItem(request)
+    product=Product.objects.get(id=id)
+    cart.remove(product)
+    return redirect('cart_detail')
+
+@login_required(login_url='/user/login_1')
+def item_increment(request,id):
+    cart = CartItem(request)
+    product = Product.objects.get(id=id)
+    cart.add(product = product)
+    return redirect('cart_detail')
+
+@login_required(login_url='/user/login_1')
+def item_decrement(request,id):
+    cart = CartItem(request)
+    product = Product.objects.get(id=id)
+    cart.decrement(product=product)
+    return redirect('cart_detail')
+
+@login_required(login_url='/user/login_1')
+def cart_clear(request):
+    cart=CartItem(request)
+    cart.clear()
+    return redirect('cart_detail')
+
+@login_required(login_url='/user/login_1')
+def cart_detail(request):
+    return render(request, 'cart/cart_detail.html')
+
+
+
 
 
 

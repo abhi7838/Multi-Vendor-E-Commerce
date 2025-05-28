@@ -36,7 +36,7 @@ class Migration(migrations.Migration):
                 ('name', models.CharField(max_length=150)),
                 ('price', models.DecimalField(decimal_places=2, max_digits=5)),
                 ('date', models.DateField(auto_now_add=True)),
-                ('Category', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='cart.category')),
+                ('Category', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='user_profile.category')),
             ],
         ),
         migrations.CreateModel(
@@ -46,7 +46,7 @@ class Migration(migrations.Migration):
                 ('quantity', models.PositiveBigIntegerField(default=1)),
                 ('date_added', models.DateTimeField(auto_now_add=True)),
                 ('user', models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
-                ('product', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='cart.product')),
+                ('product', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='user_profile.product')),
             ],
         ),
         migrations.CreateModel(
@@ -54,12 +54,12 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=150)),
-                ('Category', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='cart.category')),
+                ('Category', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='user_profile.category')),
             ],
         ),
         migrations.AddField(
             model_name='product',
             name='Sub_Category',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='cart.sub_category'),
+            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='user_profile.sub_category'),
         ),
     ]
