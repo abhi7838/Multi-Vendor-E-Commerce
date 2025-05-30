@@ -1,5 +1,5 @@
 from django.shortcuts import render,HttpResponse
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, logout
 from django.shortcuts import render, redirect
 from django.conf import settings
 from .models import UserCreateForm,ContactFormSubmission,UserProfile
@@ -13,7 +13,8 @@ def login_1(request):
     return render(request,'login_1.html')
 
 def logout(request):
-    return render(request,'logout.html')
+    logout(request)
+    return redirect('login_1')
 
 def profile(request):
     return render(request, 'profile.html')

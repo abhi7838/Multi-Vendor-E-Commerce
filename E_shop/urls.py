@@ -24,8 +24,7 @@ from django.contrib.auth import views as auth_views
 
 
 urlpatterns = [
-    path('',include('home.urls')), # all pages of home is included #index,master,views,admin 
-    path('',include('cart.urls')), # included cart app pages included cart, products, wishlist, checkout
+    path('',include('user_profile.urls')), # included cart app pages included cart, products, wishlist, checkout
     path('',include('user.urls')), # user app refrenced pages login, logout,profile,signup,contact,account
     path('admin', admin.site.urls),
     path('logout',auth_views.LogoutView.as_view(next_page = 'login_1'),name='logout'),

@@ -8,7 +8,7 @@ from django.contrib.auth import get_user_model
 import datetime
 
 # Create your models here.
-
+#copied from home_models
 class Category(models.Model):
     name = models.CharField(max_length=150)
 
@@ -29,8 +29,8 @@ class Brands(models.Model):
 
     def __str__(self):
         return self.name
-    
-    
+
+
 class Product(models.Model):
     Category = models.ForeignKey(Category, on_delete=models.CASCADE, null = True, blank=True)
     Sub_Category = models.ForeignKey(Sub_Category, on_delete=models.CASCADE, null = True, blank=True)
@@ -45,13 +45,13 @@ class Product(models.Model):
     def get_image_url(self):
         if self.image:
             return self.image.url
-        
 
 
         
-class CartItem(models.Model): # for adding products in cart 
+class CartItem(models.Model): # for adding products in cart
+    print(models.Model)
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE,null = True)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    product = models.ForeignKey('Product', on_delete=models.CASCADE)
     quantity = models.PositiveBigIntegerField(default=1)
     date_added = models.DateTimeField(auto_now_add=True)
 
@@ -74,4 +74,3 @@ class CartItem(models.Model): # for adding products in cart
 class AddToCartForm(forms.Form):
     quantity = forms.IntegerField(min_value=1,initial=1)
     product_id = forms.IntegerField(widget=forms.HiddenInput())
-
