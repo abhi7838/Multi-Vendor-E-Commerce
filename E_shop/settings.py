@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'user_profile', # storing all the information of cart 
     'user', # storing all the information of user such as login logout and others 
-    'home',
     'cart',
 
 ]
