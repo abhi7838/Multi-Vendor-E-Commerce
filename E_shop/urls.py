@@ -24,10 +24,15 @@ from django.contrib.auth import views as auth_views
 
 
 urlpatterns = [
+    path('admin', admin.site.urls),
+    # path('user_profile', include('user_profile.urls', namespace='user_profile')),
     path('',include('user_profile.urls')), # included cart app pages included cart, products, wishlist, checkout
     path('',include('user.urls')), # user app refrenced pages login, logout,profile,signup,contact,account
-    path('admin', admin.site.urls),
     path('logout',auth_views.LogoutView.as_view(next_page = 'login_1'),name='logout'),
     path('login_1',auth_views.LoginView.as_view(template_name = 'login_1.html'),name = 'login_1'),
 
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] 
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # If you serve media files
+

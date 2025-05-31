@@ -7,6 +7,8 @@ from django.db import models
 import datetime
 from django.contrib.auth.decorators import login_required
 
+app_name = 'user'
+
 # Create your views here.
 
 def login_1(request):
