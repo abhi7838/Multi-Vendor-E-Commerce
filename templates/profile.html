@@ -1,4 +1,6 @@
     {% extends 'master.html' %}  #  You might have a base.html
+    {% load static %}
+    
     {% block content %}
     {% csrf_token %}
         <h1>Welcome, {{ user.username }}!</h1>

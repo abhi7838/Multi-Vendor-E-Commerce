@@ -3,6 +3,8 @@ from django.conf import settings
 from django.urls import path, include
 from django.contrib.auth.views import LogoutView 
 
+app_name = 'user'
+
 urlpatterns = [
     path("login_1/",views.login_1, name = 'login_1'),
     path("logout",LogoutView.as_view(next_page = '/'), name = 'logout'), 

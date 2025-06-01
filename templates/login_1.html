@@ -1,5 +1,5 @@
 {% extends "master.html" %}
-
+{% load static %}
 {% block content %}
     <form method="post" action="{% url 'login' %}">
     {% csrf_token %}

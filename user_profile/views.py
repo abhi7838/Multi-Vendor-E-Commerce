@@ -2,7 +2,7 @@ from django.shortcuts import render,get_object_or_404,redirect
 from .models import *
 from django.contrib.auth.decorators import login_required
 from cart.cart import Cart
-from django.http import HttpRequest, HttpResponse,request
+from django.urls import reverse
 
 app_name = 'user_profile'
 
@@ -66,13 +66,14 @@ def cart_page(request):
     return render(request,'cart/cart.html',context)
 
 
-# @login_required(login_url='/user/login_1')
+@login_required(login_url='/user/login_1')
 def cart_add(request,id):
     print(request)
     cart = CartItem(request)
     # print(type(id))
     product = Product.objects.get(id=id)
-    return redirect('index')
+    # return redirect('index')
+    return redirect(reverse('user_profile:index'))
 
 @login_required(login_url='/user/login_1')
 def item_clear(request,id):
@@ -103,7 +104,7 @@ def cart_clear(request):
 
 @login_required(login_url='/user/login_1')
 def cart_detail(request):
-    return render(request, 'cart/cart_detail.html')
+    return render(request,'cart/cart_detail.html')
 
 
 
