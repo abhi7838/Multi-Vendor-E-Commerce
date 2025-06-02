@@ -30,6 +30,7 @@ urlpatterns = [
     path('',include('user.urls')), # user app refrenced pages login, logout,profile,signup,contact,account
     path('logout',auth_views.LogoutView.as_view(next_page = 'login_1'),name='logout'),
     path('login_1',auth_views.LoginView.as_view(template_name = 'login_1.html'),name = 'login_1'),
+    path('account/',include('django.contrib.auth.urls')) # for logi, logout,password reset, and forget password
 
 ] 
 if settings.DEBUG:

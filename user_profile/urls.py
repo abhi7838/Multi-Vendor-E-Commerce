@@ -12,7 +12,7 @@ urlpatterns = [
     path('index',views.index,name = 'index'), #for logo refresh page when someone clicks on logo page will be refreshed 
 
 
-    path('cart',views.cart,name= 'cart'),
+    # path('cart',views.cart,name= 'cart'),
     path('wishlist',views.wishlist,name= 'wishlist'),
     path('checkout',views.checkout,name= 'checkout'),
     path('products',views.products,name= 'products'),
