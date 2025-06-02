@@ -21,8 +21,11 @@ def logout(request):
 def profile(request):
     return render(request, 'profile.html')
 
-def sucessful_sign_up(request):
-    return render(request,'sucessful_sign_up.html')
+# def sucessful_sign_up(request):
+    # return render(request,'sucessful_sign_up.html')
+
+def wishlist(request):
+    return render(request, 'wishlist.html')
 
 
 def signup(request):

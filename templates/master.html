@@ -108,7 +108,7 @@
 								<li><a href="signup"><i class="fa fa-lock"></i> Signup</a></li>
 								{% if user.is_authenticated %}
 								<li class="nav-item">
-    								<form method="post" action="{% url 'logout' %}">
+    								<form method="post" action="{% url 'user:logout' %}">
         								{% csrf_token %}
         								<button type="submit" class="nav-link">
             								<i class="fa fa-user"></i> Logout
@@ -117,7 +117,7 @@
 							    </li>
 								{% else %}
 								<li class="nav-item">
-    								<a class="nav-link" href="{% url 'login_1' %}">
+    								<a class="nav-link" href="login_1">
         								<i class="fa fa-user"></i> Login
     								</a>
 								</li>
@@ -149,10 +149,10 @@
                                         {% comment %} <li><a href="shop.html">Products</a></li> {% endcomment %}
 										<li><a href="products">Products</a></li> 
 										<li><a href="checkout">Checkout</a></li> 
-										<li><a href="cart">Cart</a></li> 
+										<li><a href="cart_detail">cart_detail</a></li> 
                                     </ul>
                                 </li> 
-								<li><a href="cart">Cart</a></li>
+								<li><a href="cart_detail">cart_detail</a></li>
 								<li><a href="contact">Contact</a></li>
 							</ul>
 						</div>

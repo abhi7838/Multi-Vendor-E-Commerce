@@ -3,6 +3,7 @@ from .models import *
 from django.contrib.auth.decorators import login_required
 from cart.cart import Cart
 from django.urls import reverse
+from django.contrib import messages
 
 app_name = 'user_profile'
 
@@ -66,14 +67,34 @@ def cart_page(request):
     return render(request,'cart/cart.html',context)
 
 
+# @login_required(login_url='/user/login_1')
+# def cart_add(request,id):
+#     print(request)
+#     cart = CartItem(request)
+#     product = Product.objects.get(id=id)
+#     return redirect(reverse('user_profile:index'))
+
 @login_required(login_url='/user/login_1')
-def cart_add(request,id):
-    print(request)
-    cart = CartItem(request)
-    # print(type(id))
-    product = Product.objects.get(id=id)
-    # return redirect('index')
-    return redirect(reverse('user_profile:index'))
+def cart_add(request, id):
+    product = get_object_or_404(Product, id=id)
+    user = request.user
+
+    try:
+        # Check if the item is already in the user's cart
+        cart_item = CartItem.objects.get(user=user, product=product)
+        cart_item.quantity += 1
+        cart_item.save()
+        messages.success(request, f"{product.name} quantity updated in your cart.")
+    except CartItem.DoesNotExist:
+        # If the item is not in the cart, create a new CartItem
+        CartItem.objects.create(user=user, product=product)
+        messages.success(request, f"{product.name} added to your cart.")
+
+    # Redirect the user to the cart page or wherever you want
+    return redirect(reverse('cart_detail')) # Replace 'your_cart_view_name' with the actual URL name of your cart view
+
+
+
 
 @login_required(login_url='/user/login_1')
 def item_clear(request,id):
@@ -104,8 +125,10 @@ def cart_clear(request):
 
 @login_required(login_url='/user/login_1')
 def cart_detail(request):
-    return render(request,'cart/cart_detail.html')
-
+    cart_items = CartItem.objects.filter(user=request.user).order_by('date_added')
+    total_price = sum(item.total_item_price for item in cart_items)
+    context = {'cart_items': cart_items, 'total_price': total_price}
+    return render(request, 'cart_detail.html', context)
 
 
 # copied from home.views 
