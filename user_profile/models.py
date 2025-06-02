@@ -57,8 +57,7 @@ class CartItem(models.Model): # for adding products in cart
 
     #ensure that user doesn't have the same product multiple time 
     #unless user is null, which means its a session cart item
-    unique_together = ('user','product')
-    ordering = ['-date_added'] #order cart items by most recently added 
+ 
 
     def __str__(self):
         if self.user:
@@ -67,7 +66,7 @@ class CartItem(models.Model): # for adding products in cart
     
     @property
     def total_item_price(self):
-        return self.quantity*self.Product.price
+        return self.quantity*self.product.price
     
 
 #class for adding product in cart 

@@ -67,14 +67,14 @@ def cart_page(request):
     return render(request,'cart/cart.html',context)
 
 
-# @login_required(login_url='/user/login_1')
+# @login_required(login_url='/user/login')
 # def cart_add(request,id):
 #     print(request)
 #     cart = CartItem(request)
 #     product = Product.objects.get(id=id)
 #     return redirect(reverse('user_profile:index'))
 
-@login_required(login_url='/user/login_1')
+@login_required(login_url='/user/login')
 def cart_add(request, id):
     product = get_object_or_404(Product, id=id)
     user = request.user
@@ -91,39 +91,39 @@ def cart_add(request, id):
         messages.success(request, f"{product.name} added to your cart.")
 
     # Redirect the user to the cart page or wherever you want
-    return redirect(reverse('cart_detail')) # Replace 'your_cart_view_name' with the actual URL name of your cart view
+    return redirect(reverse('user_profile:cart_detail')) # Replace 'your_cart_view_name' with the actual URL name of your cart view
 
 
 
 
-@login_required(login_url='/user/login_1')
+@login_required(login_url='/user/login')
 def item_clear(request,id):
     cart = CartItem(request)
     product=Product.objects.get(id=id)
     cart.remove(product)
     return redirect('cart_detail')
 
-@login_required(login_url='/user/login_1')
+@login_required(login_url='/user/login')
 def item_increment(request,id):
     cart = CartItem(request)
     product = Product.objects.get(id=id)
     cart.add(product = product)
     return redirect('cart_detail')
 
-@login_required(login_url='/user/login_1')
+@login_required(login_url='/user/login')
 def item_decrement(request,id):
     cart = CartItem(request)
     product = Product.objects.get(id=id)
     cart.decrement(product=product)
     return redirect('cart_detail')
 
-@login_required(login_url='/user/login_1')
+@login_required(login_url='/user/login')
 def cart_clear(request):
     cart=CartItem(request)
     cart.clear()
     return redirect('cart_detail')
 
-@login_required(login_url='/user/login_1')
+@login_required(login_url='/user/login')
 def cart_detail(request):
     cart_items = CartItem.objects.filter(user=request.user).order_by('date_added')
     total_price = sum(item.total_item_price for item in cart_items)
