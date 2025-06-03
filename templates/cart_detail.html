@@ -43,9 +43,10 @@
                             </td>
                             <td class="cart_quantity">
                                 <div class="cart_quantity_button">
-                                    <a class="cart_quantity_up" href=""> + </a>
+                                    <a class="cart_quantity_up" href="{% url 'user_profile:item_increment' item.product.id %}"> + </a>
+                                    {% comment %} <a class="cart_quantity_up" href="{% url 'user_profile:item_increment' value.product.id %}"> + </a> {% endcomment %}
                                     <input class="cart_quantity_input" type="text" name="quantity" value="{{ item.quantity }}" autocomplete="off" size="2">
-                                    <a class="cart_quantity_down" href=""> - </a>
+                                    <a class="cart_quantity_down" href="{% url 'user_profile:item_decrement' item.product.id %}"> - </a>
                                 </div>
                             </td>
                             <td class="cart_total">

@@ -1,7 +1,7 @@
 {% extends "master.html" %}
 {% load static %}
 {% block content %}
-    <form method="post" action="{% url 'user:login_1' %}">
+    <form method="post" action="{% url 'user:login' %}">
     {% csrf_token %}
     <section>
         <div class="col-sm-4 col-sm-offset-1">

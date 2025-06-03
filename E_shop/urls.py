@@ -28,8 +28,8 @@ urlpatterns = [
     # path('user_profile', include('user_profile.urls', namespace='user_profile')),
     path('',include('user_profile.urls')), # included cart app pages included cart, products, wishlist, checkout
     path('',include('user.urls')), # user app refrenced pages login, logout,profile,signup,contact,account
-    path('logout',auth_views.LogoutView.as_view(next_page = 'login_1'),name='logout'),
-    path('login_1',auth_views.LoginView.as_view(template_name = 'login_1.html'),name = 'login_1'),
+    path('logout',auth_views.LogoutView.as_view(next_page = 'login'),name='logout'),
+    path('login',auth_views.LoginView.as_view(template_name = 'login.html'),name = 'login'),
     path('account/',include('django.contrib.auth.urls')) # for logi, logout,password reset, and forget password
 
 ] 

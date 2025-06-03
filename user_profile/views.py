@@ -1,9 +1,9 @@
 from django.shortcuts import render,get_object_or_404,redirect
 from .models import *
 from django.contrib.auth.decorators import login_required
-from cart.cart import Cart
 from django.urls import reverse
 from django.contrib import messages
+from .cart import *
 
 app_name = 'user_profile'
 
@@ -105,17 +105,17 @@ def item_clear(request,id):
 
 @login_required(login_url='/user/login')
 def item_increment(request,id):
-    cart = CartItem(request)
-    product = Product.objects.get(id=id)
+    cart = Cart(request)
+    product = get_object_or_404(Product, id=id)
     cart.add(product = product)
-    return redirect('cart_detail')
+    return redirect(reverse('user_profile:cart_detail'))
 
 @login_required(login_url='/user/login')
 def item_decrement(request,id):
-    cart = CartItem(request)
-    product = Product.objects.get(id=id)
+    cart = Cart(request)
+    product = get_object_or_404(Product, id=id)
     cart.decrement(product=product)
-    return redirect('cart_detail')
+    return redirect(reverse('user_profile:cart_detail'))
 
 @login_required(login_url='/user/login')
 def cart_clear(request):
