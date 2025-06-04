@@ -1,0 +1,21 @@
+{% extends "master.html" %}
+
+ {% load static %}
+    
+{% block content %}
+<h2>Login</h2>
+<form method="post">
+{% csrf_token %}
+{% if form.errors %}
+    <p style="color: red;">Please correct the errors below:</p>
+{% endif %}
+<p>
+    {{ form.username.label_tag }} {{ form.username }}
+</p>
+<p>
+    {{ form.password.label_tag }} {{ form.password }}
+</p>
+<button type="submit">Login</button>
+<p><a href="{% url 'password_reset' %}">Forgot your password?</a></p>
+</form>
+{% endblock %}

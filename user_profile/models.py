@@ -57,8 +57,7 @@ class CartItem(models.Model): # for adding products in cart
 
     #ensure that user doesn't have the same product multiple time 
     #unless user is null, which means its a session cart item
-    unique_together = ('user','product')
-    ordering = ['-date_added'] #order cart items by most recently added 
+ 
 
     def __str__(self):
         if self.user:
@@ -67,10 +66,52 @@ class CartItem(models.Model): # for adding products in cart
     
     @property
     def total_item_price(self):
-        return self.quantity*self.Product.price
+        return self.quantity*self.product.price
     
 
 #class for adding product in cart 
 class AddToCartForm(forms.Form):
     quantity = forms.IntegerField(min_value=1,initial=1)
     product_id = forms.IntegerField(widget=forms.HiddenInput())
+
+class Order(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='orders')
+    first_name = models.CharField(max_length=50)
+    last_name = models.CharField(max_length=50)
+    email=models.EmailField("")
+    address = models.CharField(max_length=199)
+    postal_code = models.CharField(max_length=100)
+    city = models.CharField(max_length=100)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+    paid = models.BooleanField(default=False)
+    total_amount = models.DecimalField(max_digits=10, decimal_places=2,default=0.00)
+
+    class meta:
+        ordering = ['-created']
+        indexes = [
+            models.Index(fields=['-created']),
+        ]
+
+    def __str__(self):
+        return f'Oder{self.id}'
+    
+    def get_total_cost(self):
+        return sum(item.get_cost() for item in self.items.all())
+    
+class OrderItem(models.Model):
+    order = models.ForeignKey(Order, related_name='item', on_delete= models.CASCADE)
+    product = models.ForeignKey(Product,related_name='order_item',on_delete=models.CASCADE)
+    price = models.DecimalField(max_digits=10,decimal_places=2)
+    quantity = models.PositiveBigIntegerField(default=1)
+
+    class Meta:
+        unique_together = ('order','product')
+
+
+    def __str__(self):
+        return str(self.id)
+    
+    def get_cost(self):
+        return self.price*self.quantity
+    

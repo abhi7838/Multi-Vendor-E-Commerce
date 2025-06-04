@@ -1,0 +1,55 @@
+{% extends "master.html" %}
+{% load static %}
+
+{% block head %}
+    <title>Order Confirmation</title>
+    {# Add any specific CSS if needed #}
+{% endblock %}
+
+{% block content %}
+    <section id="order_confirmation">
+        <div class="container">
+            <div class="breadcrumbs">
+                <ol class="breadcrumb">
+                    <li><a href="{% url 'user_profile:index' %}">Home</a></li>
+                    <li class="active">Order Confirmation</li>
+                </ol>
+            </div>
+
+            <div class="alert alert-success text-center">
+                <h2>Thank You for Your Order!</h2>
+                <p>Your order (Order ID: <strong>#{{ order.id }}</strong>) has been placed successfully.</p>
+                <p>We've sent an order confirmation to your email address ({{ order.email }}).</p>
+                <br>
+                <h3>Order Details:</h3>
+                <p><strong>Shipping Address:</strong> {{ order.address }}, {{ order.city }} - {{ order.postal_code }}</p>
+                <p><strong>Total Amount:</strong> ₹{{ order.total_amount|floatformat:2 }}</p>
+
+                <h4>Items in your order:</h4>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Quantity</th>
+                            <th>Price per item</th>
+                            <th>Subtotal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in order.items.all %}
+                        <tr>
+                            <td>{{ item.product.name }}</td>
+                            <td>{{ item.quantity }}</td>
+                            <td>₹{{ item.price|floatformat:2 }}</td>
+                            <td>₹{{ item.get_cost|floatformat:2 }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <br>
+                <a href="{% url 'user_profile:my_orders' %}" class="btn btn-primary">View My Orders</a>
+                <a href="{% url 'user_profile:index' %}" class="btn btn-default">Continue Shopping</a>
+            </div>
+        </div>
+    </section>
+{% endblock %}
