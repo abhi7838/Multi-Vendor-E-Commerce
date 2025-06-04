@@ -102,18 +102,30 @@
 					<div class="col-sm-8">
 						<div class="shop-menu pull-right">
 							<ul class="nav navbar-nav">
-								<li><a href="wishlist"><i class="fa fa-star"></i> Wishlist</a></li>
-								<li><a href="checkout"><i class="fa fa-crosshairs"></i> Checkout</a></li>
-								<li><a href="cart_detail"><i class="fa fa-shopping-cart"></i> cart_detail </a></li>
-								<li><a href="signup"><i class="fa fa-lock"></i> Signup</a></li>
+								{# Keep your existing wishlist link if you have one #}
+								<li><a href="{% url 'user_profile:wishlist' %}"><i class="fa fa-star"></i> Wishlist</a></li>
+								
+								{# Link to the new checkout view #}
+								<li><a href="{% url 'user_profile:checkout' %}"><i class="fa fa-crosshairs"></i> Checkout</a></li>
+								
+								{# Link to your cart detail page #}
+								<li><a href="{% url 'user_profile:cart_detail' %}"><i class="fa fa-shopping-cart"></i> Cart</a></li>
+								
+								{# Add My Orders link for authenticated users #}
+								{% if user.is_authenticated %}
+									<li><a href="{% url 'user_profile:my_orders' %}"><i class="fa fa-list"></i> My Orders</a></li>
+								{% endif %}
+
 								<li>
 									{% if user.is_authenticated %}
-										<form method="post" action="{% url 'logout' %}">
+										<form method="post" action="{% url 'logout' %}" style="display: inline;">
 											{% csrf_token %}
-											<button type="submit">Logout</button>
+											<button type="submit" style="background: none; border: none; color: #696763; font-family: 'Roboto', sans-serif; font-size: 14px; font-weight: 300; padding: 0; margin-top: 10px; cursor: pointer;">
+												<i class="fa fa-sign-out"></i> Logout
+											</button>
 										</form>
 									{% else %}
-										<a href="{% url 'login' %}">Login</a>
+										<a href="{% url 'login' %}"><i class="fa fa-lock"></i> Login</a>
 									{% endif %}
 								</li>
 							</ul>

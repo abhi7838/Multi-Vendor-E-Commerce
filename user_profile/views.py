@@ -4,6 +4,9 @@ from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from django.contrib import messages
 from .cart import *
+from django.http import JsonResponse
+from .form import CheckoutForm 
+from .models import Order, OrderItem 
 
 app_name = 'user_profile'
 
@@ -17,8 +20,64 @@ def wishlist(request):
 def products(request):
     return render(request,'products.html') # list of all available products
 
+@login_required(login_url='/user/login')
 def checkout(request):
-    return render(request,'checkout.html')
+    cart_items = CartItem.objects.filter(user=request.user)
+    if not cart_items.exists():
+        messages.warning(request,"your cart is empty. Please add items befor checkout")
+        return redirect('user_profile:cart_detail') #redirect if cart is empty 
+    
+    total_price = sum(item.total_item_price for item in cart_items)
+    if request.method == 'POST':
+        form = CheckoutForm(request.POST)
+        if form.is_valid():
+            order=Order.objects.create(
+                user=request.user,
+                first_name=form.cleaned_data['first_name'],
+                last_name = form.cleaned_data['last_name'],
+                email = form.cleaned_data['email'],
+                address = form.cleaned_data['address'],
+                postal_code = form.cleaned_data['postal_code'],
+                city = form.cleaned_data['city'],
+                total_amount = total_price
+            )
+
+            for cart_item in cart_items:
+                OrderItem.objects.create(
+                    order = order,
+                    product = cart_item.product,
+                    price=cart_item.product.price,
+                    quantity = cart_item.quantity
+                )
+            cart_items.delete()
+
+            messages.success(request,"your order have been placed sucessfully")
+            return redirect(reverse('user_profile:order_confirmation', args=[order.id]))
+
+    else:
+        initial_data = {}
+        if  request.user.is_authenticated:
+            initial_data['email'] = request.user.email
+            form = CheckoutForm(initial = initial_data)
+    context = {
+        'form':form,
+        'cart_items':cart_items,
+        'total_price':total_price,
+    }
+    return render(request, 'checkout.html',context)
+@login_required(login_url='/user/login')
+def order_confirmation(request, order_id):
+    order = get_object_or_404(Order, id = order_id,user=request.user)
+    return render(request, 'order_confirmation.html', {'order':order})
+
+@login_required(login_url='/user/login')
+def my_order(request):
+    orders = Order.objects.filter(user=request.user).order_by('-created')
+    return render(request, 'my_order.html', {'orders':orders})
+
+
+
+
 
 
 
@@ -96,18 +155,29 @@ def cart_add(request, id):
 
 
 
+# @login_required(login_url='/user/login')
+# def item_clear(request,id):
+#     cart = CartItem(request)
+#     product=Product.objects.get(id=id)
+#     Cart.remove(product)
+#     return redirect('user_profile:cart_detail')
+
 @login_required(login_url='/user/login')
-def item_clear(request,id):
-    cart = CartItem(request)
-    product=Product.objects.get(id=id)
-    cart.remove(product)
-    return redirect('cart_detail')
+def item_clear(request, id):
+    try:
+        cart_item = CartItem.objects.get(user=request.user, product__id=id)
+        cart_item.delete()
+        messages.success(request, f"{cart_item.product.name} removed from your cart.")
+    except CartItem.DoesNotExist:
+        messages.error(request, "Item not found in your cart.")
+    return redirect('user_profile:cart_detail')
 
 @login_required(login_url='/user/login')
 def item_increment(request,id):
     cart = Cart(request)
     product = get_object_or_404(Product, id=id)
     cart.add(product = product)
+    
     return redirect(reverse('user_profile:cart_detail'))
 
 @login_required(login_url='/user/login')
