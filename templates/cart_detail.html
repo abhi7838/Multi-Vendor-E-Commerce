@@ -29,34 +29,54 @@
                         </tr>
                     </thead>
                     <tbody>
-						{% comment %} {% for prod in Product %} {% endcomment %}
-						<tr>
-							<td class="cart_product">
-								<a href=""><img src="{{prod.image}}" alt=""></a>
-							</td>
-							<td class="cart_description">
-								<h4><a href="">Colorblock Scuba</a></h4>
-								<p>Web ID: 1089772</p>
-							</td>
-							<td class="cart_price">
-								<p>$59</p>
-							</td>
-							<td class="cart_quantity">
-								<div class="cart_quantity_button">
-									<a class="cart_quantity_up" href=""> + </a>
-									<input class="cart_quantity_input" type="text" name="quantity" value="1" autocomplete="off" size="2">
-									<a class="cart_quantity_down" href=""> - </a>
-								</div>
-							</td>
-							<td class="cart_total">
-								<p class="cart_total_price">$59</p>
-							</td>
-							<td class="cart_delete">
-								<a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
-							</td>
-						</tr>
-						{% comment %} {% endfor %} {% endcomment %}
+                        {% for item in cart_items %}
+                        <tr>
+                            <td class="cart_product">
+                                <a href=""><img src="{{ item.product.image.url }}" alt=""></a>
+                            </td>
+                            <td class="cart_description">
+                                <h4><a href="">{{ item.product.name }}</a></h4>
+                                <br>
+                            </td>
+                            <td class="cart_price">
+                                <p>₹{{ item.product.price }}</p>
+                            </td>
+                            <td class="cart_quantity">
+                                <div class="cart_quantity_button">
+                                    {% comment %} <a class="cart_quantity_up" href="{% url 'user_profile:item_increment' item.product.id %}"> + </a> {% endcomment %}
+                                    {% comment %} <a class="cart_quantity_up" href="{% url 'user_profile:item_increment' value.product.id %}"> + </a> {% endcomment %}
+                                    <input class="cart_quantity_input" type="text" name="quantity" value="{{ item.quantity }}" autocomplete="off" size="2">
+                                    <br>
+                                    <br>
+                                    {% comment %} <a class="cart_quantity_down" href="{% url 'user_profile:item_decrement' item.product.id %}"> - </a> {% endcomment %}
+                                </div>
+                            </td>
+                            <td class="cart_total">
+                                <p class="cart_total_price">₹{{item.total_item_price|floatformat:2 }}</p>
+                            </td>
+                            <td class="cart_delete">
+                                <a class="cart_quantity_delete" href="{%  url 'user_profile:item_clear'  item.product.id %}"><i class="fa fa-times"></i></a>
+                            </td>
+
+                        </tr>
+                        
+                        {% endfor %}
+                        {% for item in cart_items %}
+                        <tr>
+                            <td class="cart_total_price">{{ item.total }}</td>
+                            <td class="cart_total_price"><td>{{ item.total }}</td>
+                            
+                        </tr>
+                        {% empty %}
+                        <tr><td colspan="5">Your cart is empty.</td></tr>
+                        {% endfor %}
                     </tbody>
+                    <tfoot>
+                        <tr>
+                            <td class="cart_description" colspan="4" style="text-align: right !important; font-size:30px bold;">Total:</td>
+                            <td class="cart_total_price" style="font-weight: bold;">₹{{ total_price }}</td>
+                        </tr>
+                    </tfoot>
                 </table>
             </div>
         </div>

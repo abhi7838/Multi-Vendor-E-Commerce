@@ -1,0 +1,60 @@
+{% extends "master.html" %}
+{% load static %}
+
+{% block head %}
+    <title>My Orders</title>
+    <link rel="stylesheet" href="{% static 'css/cart.css' %}"> {# Reusing cart styles for tables #}
+{% endblock %}
+
+{% block content %}
+    <section id="my_orders">
+        <div class="container">
+            <div class="breadcrumbs">
+                <ol class="breadcrumb">
+                    <li><a href="{% url 'user_profile:index' %}">Home</a></li>
+                    <li class="active">My Orders</li>
+                </ol>
+            </div>
+
+            <h2>My Orders</h2>
+            {% if orders %}
+                <div class="table-responsive cart_info">
+                    <table class="table table-condensed">
+                        <thead>
+                            <tr class="cart_menu">
+                                <td>Order ID</td>
+                                <td>Date</td>
+                                <td>Total Amount</td>
+                                <td>Status</td>
+                                <td>Actions</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for order in orders %}
+                                <tr>
+                                    <td>#{{ order.id }}</td>
+                                    <td>{{ order.created|date:"M d, Y H:i" }}</td>
+                                    <td>₹{{ order.total_amount|floatformat:2 }}</td>
+                                    <td>
+                                        {% if order.paid %}
+                                            <span class="label label-success">Paid</span>
+                                        {% else %}
+                                            <span class="label label-warning">Pending Payment</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        <a href="{% url 'user_profile:order_confirmation' order.id %}" class="btn btn-info btn-xs">View Details</a>
+                                        {# Add a "Pay Now" button if order.paid is False and you integrate a payment gateway #}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <p>You haven't placed any orders yet.</p>
+                <a href="{% url 'user_profile:index' %}" class="btn btn-default">Start Shopping</a>
+            {% endif %}
+        </div>
+    </section>
+{% endblock %}

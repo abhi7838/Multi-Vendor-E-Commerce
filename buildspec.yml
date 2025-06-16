@@ -1,0 +1,22 @@
+version: 0.2
+phases:
+  install:
+    runtime-versions:
+      nodejs: 18
+    commands:
+      - npm install
+  pre_build:
+    commands:
+      - echo Running tests...
+      - npm test
+  build:
+    commands:
+      - echo Building the application...
+      - npm run build # Or whatever command compiles your app
+  post_build:
+    commands:
+      - echo Build complete.
+artifacts:
+  files:
+    - '**/*' # Package all files as artifacts for deployment
+  base-directory: 'dist' # If your build output is in a 'dist' folder

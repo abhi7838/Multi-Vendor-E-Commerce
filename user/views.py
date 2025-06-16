@@ -9,43 +9,14 @@ from django.contrib.auth.decorators import login_required
 
 app_name = 'user'
 
-# Create your views here.
-
-def login_1(request):
-    return render(request,'login_1.html')
-
-def logout(request):
-    logout(request)
-    return redirect('login_1')
 
 def profile(request):
     return render(request, 'profile.html')
 
-# def sucessful_sign_up(request):
-    # return render(request,'sucessful_sign_up.html')
+
 
 def wishlist(request):
     return render(request, 'wishlist.html')
-
-
-def signup(request):
-    if request.method == 'POST':
-        form = UserCreateForm(request.POST)
-        if form.is_valid():
-            new_user = form.save()
-            new_user = authenticate(
-                username = form.cleaned_data['username'],
-                passsword = form.cleaned_data['password1'],
-            )
-            login_1(request)
-            return redirect('sucessful_sign_up')
-    else:
-        form = UserCreateForm()
-
-    context = {
-        'form':form,
-    }
-    return render(request,'registration/signup.html',context)
 
 
 @login_required
